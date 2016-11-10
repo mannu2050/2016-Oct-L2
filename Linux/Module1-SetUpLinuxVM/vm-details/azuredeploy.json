@@ -24,6 +24,11 @@
       "type": "string",
       "metadata": {
         "description": "Name for the Virtual Machine."
+      },
+       "vmType": {
+      "type": "string",
+      "metadata": {
+        "description": "Type for the Virtual Machine."
       }
     }
   },
@@ -43,7 +48,7 @@
     "publicIPAddressName": "[concat(uniquestring(parameters('vmName')), 'publicip')]",
     "publicIPAddressType": "Dynamic",
     "vmStorageAccountContainerName": "vhds",
-    "vmSize": "Standard_DS2",
+    "vmSize": "[concat(parameters('vmType'), uniquestring(resourceGroup().id))]",
     "virtualNetworkName": "[concat(uniquestring(parameters('vmName')), 'vnet')]",
     "sshKeyPath": "[concat('/home/',parameters('adminUserName'),'/.ssh/authorized_keys')]",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
